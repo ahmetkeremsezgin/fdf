@@ -6,15 +6,12 @@
 /*   By: asezgin <asezgin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 11:43:42 by asezgin           #+#    #+#             */
-/*   Updated: 2025/03/17 11:43:43 by asezgin          ###   ########.fr       */
+/*   Updated: 2025/03/19 08:25:23 by asezgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-/*
-** C dizisinde karakter arar
-*/
 char	*ft_strchr(const char *s, int c)
 {
 	while (*s)
@@ -28,9 +25,6 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-/*
-** Belirtilen tabanda sayısal dizgiyi tam sayıya dönüştürür
-*/
 int	ft_atoi_base(const char *str, int base)
 {
 	int	result;

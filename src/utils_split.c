@@ -6,15 +6,12 @@
 /*   By: asezgin <asezgin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 11:43:50 by asezgin           #+#    #+#             */
-/*   Updated: 2025/03/17 11:43:52 by asezgin          ###   ########.fr       */
+/*   Updated: 2025/03/19 08:25:16 by asezgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-/*
-** Bir dizgide belirli bir ayırıcı karakterle ayrılmış kelimeleri sayar
-*/
 static int	word_count(char const *s, char c)
 {
 	int	count;
@@ -34,9 +31,6 @@ static int	word_count(char const *s, char c)
 	return (count);
 }
 
-/*
-** Bir dizgiden kelime çıkarır
-*/
 static char	*get_word(char const *s, char c, int *i)
 {
 	char	*word;
@@ -58,9 +52,6 @@ static char	*get_word(char const *s, char c, int *i)
 	return (word);
 }
 
-/*
-** Split fonksiyonu için bellek ayırma ve hata yönetimi
-*/
 static char	**allocate_result(int words)
 {
 	char	**result;
@@ -71,9 +62,6 @@ static char	**allocate_result(int words)
 	return (result);
 }
 
-/*
-** Split fonksiyonu için kelimeleri doldurma
-*/
 static int	fill_words(char **result, char const *s, char c, int words)
 {
 	int	i;
@@ -97,9 +85,6 @@ static int	fill_words(char **result, char const *s, char c, int words)
 	return (1);
 }
 
-/*
-** Bir dizgiyi belirli bir ayırıcı karaktere göre böler
-*/
 char	**ft_split(char const *s, char c)
 {
 	char	**result;

@@ -6,15 +6,12 @@
 /*   By: asezgin <asezgin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 11:44:27 by asezgin           #+#    #+#             */
-/*   Updated: 2025/03/17 11:44:28 by asezgin          ###   ########.fr       */
+/*   Updated: 2025/03/19 08:24:05 by asezgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-/*
-** Haritanın ölçek faktörünü hesaplar
-*/
 static float	get_scale_factor(t_map *map)
 {
 	float	scale_x;
@@ -24,9 +21,10 @@ static float	get_scale_factor(t_map *map)
 	float	scale;
 
 	map_width = (map->width + map->height) * 0.5;
-	map_height = (map->width + map->height) * 0.5 * 1.5;
-	scale_x = (float)(WIN_WIDTH * 0.75) / map_width;
-	scale_y = (float)(WIN_HEIGHT * 0.75) / map_height;
+	map_height = (map->width + map->height) * 0.5
+		+ (((get_max_height(map) - get_min_height(map)) / 2));
+	scale_x = (float)(WIN_WIDTH * 0.50) / map_width;
+	scale_y = (float)(WIN_HEIGHT * 0.50) / map_height;
 	if (scale_x < scale_y)
 		scale = scale_x;
 	else
@@ -38,9 +36,6 @@ static float	get_scale_factor(t_map *map)
 	return (scale);
 }
 
-/*
-** İzometrik projeksiyon hesaplar
-*/
 static void	calculate_iso(t_point_iso *p, t_point p1, t_point p2, float scale)
 {
 	p->iso_x1 = (p1.x - p1.y) * scale;
@@ -53,9 +48,6 @@ static void	calculate_iso(t_point_iso *p, t_point p1, t_point p2, float scale)
 	p->iso_y2 += WIN_HEIGHT / 2;
 }
 
-/*
-** Bresenham algoritması için delta ve adım hesaplar
-*/
 static void	calculate_delta(t_delta *d, t_point_iso *p)
 {
 	d->dx = p->iso_x2 - p->iso_x1;
@@ -68,9 +60,6 @@ static void	calculate_delta(t_delta *d, t_point_iso *p)
 	d->dy /= d->step;
 }
 
-/*
-** İki nokta arasında çizgi çizer
-*/
 void	draw_line(t_point p1, t_point p2, t_fdf *fdf)
 {
 	t_point_iso	iso;
@@ -92,9 +81,6 @@ void	draw_line(t_point p1, t_point p2, t_fdf *fdf)
 	}
 }
 
-/*
-** Haritayı ekrana çizer
-*/
 void	draw_map(t_fdf *fdf)
 {
 	int	x;

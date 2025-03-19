@@ -6,15 +6,12 @@
 /*   By: asezgin <asezgin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 11:43:55 by asezgin           #+#    #+#             */
-/*   Updated: 2025/03/17 11:43:56 by asezgin          ###   ########.fr       */
+/*   Updated: 2025/03/19 08:24:58 by asezgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-/*
-** Satırdaki kelime sayısını hesaplar
-*/
 int	count_words(char *line)
 {
 	int	count;
@@ -34,9 +31,6 @@ int	count_words(char *line)
 	return (count);
 }
 
-/*
-** Harita noktasının z değerini ve rengini ayarlar
-*/
 void	set_point_values(t_point *point, char *str)
 {
 	char	*comma;
@@ -52,9 +46,6 @@ void	set_point_values(t_point *point, char *str)
 	point->z = ft_atoi(str);
 }
 
-/*
-** Harita noktaları için bellek ayrılır
-*/
 int	allocate_map_points(t_map *map)
 {
 	int	i;
@@ -78,9 +69,6 @@ int	allocate_map_points(t_map *map)
 	return (1);
 }
 
-/*
-** Harita belleğini temizler
-*/
 void	free_map(t_map *map)
 {
 	int	i;

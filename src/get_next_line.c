@@ -11,105 +11,90 @@
 /* ************************************************************************** */
 
 #include "../includes/get_next_line.h"
+#include <stdlib.h>
+#include <unistd.h>
 
-static char	*ft_read_file(int fd, char *save_str)
+char	*ft_last_part(char *buff)
 {
-	char	*buffer;
-	char	*temp;
-	int		read_bytes;
+	int		a;
+	int		i;
+	char	*s1;
 
-	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
+	i = 0;
+	a = 0;
+	while (buff[a] && buff[a] != '\n')
+		a++;
+	if (!buff[a])
+		return (free(buff), NULL);
+	s1 = ft_calloc(((ft_strlen(buff) - a)), sizeof(char));
+	if (!s1)
 		return (NULL);
-	read_bytes = 1;
-	while (read_bytes > 0 && !gnl_strchr(save_str, '\n'))
+	a++;
+	while (buff[a] != '\0')
 	{
-		read_bytes = read(fd, buffer, BUFFER_SIZE);
-		if (read_bytes == -1)
-		{
-			free(buffer);
-			return (NULL);
-		}
-		buffer[read_bytes] = '\0';
-		temp = save_str;
-		save_str = gnl_strjoin(save_str, buffer);
-		free(temp);
-		if (!save_str)
-			break ;
+		s1[i] = buff[a];
+		i++;
+		a++;
 	}
-	free(buffer);
-	return (save_str);
+	free(buff);
+	return (s1);
 }
 
-static char	*ft_get_line(char *save_str)
+char	*ft_first_part(char *buff)
 {
-	char	*line;
+	char	*src;
+	int		a;
 	int		i;
 
+	a = 0;
 	i = 0;
-	if (!save_str || !save_str[0])
+	if (!buff[a])
 		return (NULL);
-	while (save_str[i] && save_str[i] != '\n')
-		i++;
-	if (save_str[i] == '\n')
-		i++;
-	line = malloc(sizeof(char) * (i + 1));
-	if (!line)
+	while (buff[a] && buff[a] != '\n')
+		a++;
+	src = ft_calloc((a + 2), sizeof(char));
+	if (!src)
 		return (NULL);
-	i = 0;
-	while (save_str[i] && save_str[i] != '\n')
+	while (i <= a && buff[i] != '\0')
 	{
-		line[i] = save_str[i];
+		src[i] = buff[i];
 		i++;
 	}
-	if (save_str[i] == '\n')
-		line[i++] = '\n';
-	line[i] = '\0';
-	return (line);
+	return (src);
 }
 
-static char	*ft_save_remaining(char *save_str)
+char	*ft_alloc(int fd, char *buff)
 {
-	char	*new_save;
-	int		i;
-	int		j;
+	char	*readed;
+	int		readed_len;
 
-	i = 0;
-	while (save_str[i] && save_str[i] != '\n')
-		i++;
-	if (!save_str[i])
-	{
-		free(save_str);
+	readed = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
+	if (!readed)
 		return (NULL);
-	}
-	new_save = malloc(sizeof(char) * (gnl_strlen(save_str) - i + 1));
-	if (!new_save)
+	readed_len = 1;
+	while (!ft_gt_strchr(readed) && readed_len != 0)
 	{
-		free(save_str);
-		return (NULL);
+		readed_len = read(fd, readed, BUFFER_SIZE);
+		if (readed_len == -1)
+			return (free(readed), NULL);
+		readed[readed_len] = '\0';
+		buff = ft_strjoin(buff, readed);
 	}
-	i++;
-	j = 0;
-	while (save_str[i])
-		new_save[j++] = save_str[i++];
-	new_save[j] = '\0';
-	free(save_str);
-	return (new_save);
+	free(readed);
+	return (buff);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*save_str;
-	char		*line;
+	static char	*buff;
+	char		*src;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	if (!save_str)
-		save_str = gnl_calloc(1, 1);
-	save_str = ft_read_file(fd, save_str);
-	if (!save_str)
-		return (NULL);
-	line = ft_get_line(save_str);
-	save_str = ft_save_remaining(save_str);
-	return (line);
+		return (free(buff), buff = NULL, NULL);
+	buff = ft_alloc(fd, buff);
+	if (!buff)
+		return (free(buff), buff = NULL, NULL);
+	src = ft_first_part(buff);
+	buff = ft_last_part(buff);
+	return (src);
 }

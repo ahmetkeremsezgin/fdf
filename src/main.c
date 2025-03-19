@@ -6,15 +6,12 @@
 /*   By: asezgin <asezgin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 11:44:07 by asezgin           #+#    #+#             */
-/*   Updated: 2025/03/17 11:44:08 by asezgin          ###   ########.fr       */
+/*   Updated: 2025/03/19 08:38:27 by asezgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-/*
-** FDF yapısını başlatır
-*/
 t_fdf	*init_fdf(t_map *map)
 {
 	t_fdf	*fdf;
@@ -38,9 +35,6 @@ t_fdf	*init_fdf(t_map *map)
 	return (fdf);
 }
 
-/*
-** Hata mesajını yazdırır ve programı sonlandırır
-*/
 static int	handle_error(char *msg, t_map *map)
 {
 	if (map)
@@ -49,9 +43,6 @@ static int	handle_error(char *msg, t_map *map)
 	return (1);
 }
 
-/*
-** Ana program işlevi
-*/
 int	main(int argc, char **argv)
 {
 	t_fdf	*fdf;

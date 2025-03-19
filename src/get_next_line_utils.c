@@ -10,73 +10,76 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/get_next_line.h"
+#include <stdlib.h>
 
-size_t	gnl_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (s[i])
+	while (s[i] != '\0')
 		i++;
 	return (i);
 }
 
-char	*gnl_strchr(const char *s, int c)
+char	*ft_calloc(int nmemb, int size)
 {
-	if (!s)
-		return (NULL);
-	while (*s)
+	int		i;
+	int		byte;
+	char	*x;
+
+	i = 0;
+	byte = nmemb * size;
+	x = (char *)malloc(byte);
+	if (!x)
+		return (0);
+	while (byte > 0)
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
+		x[i] = 0;
+		i++;
+		byte--;
 	}
-	if (*s == (char)c)
-		return ((char *)s);
-	return (NULL);
+	return (x);
 }
 
-char	*gnl_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*str;
 	int		i;
 	int		j;
+	char	*dst;
 
-	if (!s1 || !s2)
-		return (NULL);
-	str = malloc(sizeof(char) * (gnl_strlen(s1) + gnl_strlen(s2) + 1));
-	if (!str)
-		return (NULL);
 	i = 0;
-	while (s1[i])
+	j = 0;
+	if (!s1)
 	{
-		str[i] = s1[i];
+		s1 = (char *)malloc(sizeof(char) * 1);
+		s1[0] = '\0';
+	}
+	dst = (char *)malloc(((ft_strlen(s1) + ft_strlen(s2)) * sizeof(char)) + 1);
+	if (!dst)
+		return (0);
+	while (s1[i] != '\0')
+	{
+		dst[i] = s1[i];
 		i++;
 	}
-	j = 0;
-	while (s2[j])
-		str[i++] = s2[j++];
-	str[i] = '\0';
-	return (str);
+	while (s2[j] != '\0')
+		dst[i++] = s2[j++];
+	dst[i] = '\0';
+	free(s1);
+	return (dst);
 }
 
-static void	gnl_bzero(void *s, size_t n)
+int	ft_gt_strchr(const char *s)
 {
-	unsigned char	*ptr;
+	int	i;
 
-	ptr = (unsigned char *)s;
-	while (n--)
-		*ptr++ = 0;
-}
-
-void	*gnl_calloc(size_t count, size_t size)
-{
-	void	*ptr;
-
-	ptr = malloc(count * size);
-	if (!ptr)
-		return (NULL);
-	gnl_bzero(ptr, count * size);
-	return (ptr);
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
 }

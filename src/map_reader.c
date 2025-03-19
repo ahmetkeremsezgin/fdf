@@ -6,15 +6,12 @@
 /*   By: asezgin <asezgin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 11:44:00 by asezgin           #+#    #+#             */
-/*   Updated: 2025/03/17 11:44:01 by asezgin          ###   ########.fr       */
+/*   Updated: 2025/03/19 08:24:45 by asezgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-/*
-** Harita dosyasının yüksekliğini hesaplar
-*/
 static int	get_height(char *filename)
 {
 	int		fd;
@@ -36,9 +33,6 @@ static int	get_height(char *filename)
 	return (height);
 }
 
-/*
-** Haritanın genişliğini hesaplar
-*/
 static int	get_width(char *filename)
 {
 	int		fd;
@@ -60,9 +54,6 @@ static int	get_width(char *filename)
 	return (width);
 }
 
-/*
-** Satırdaki noktaları işler
-*/
 static void	process_line(t_map *map, char **split, int i)
 {
 	int	j;
@@ -79,9 +70,6 @@ static void	process_line(t_map *map, char **split, int i)
 	free(split);
 }
 
-/*
-** Harita noktalarını doldurur
-*/
 static void	fill_map_points(t_map *map, int fd)
 {
 	char	*line;
@@ -99,9 +87,6 @@ static void	fill_map_points(t_map *map, int fd)
 	}
 }
 
-/*
-** Harita dosyasını okur ve t_map yapısı oluşturur
-*/
 t_map	*read_map(char *filename)
 {
 	t_map	*map;
