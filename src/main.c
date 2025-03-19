@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../includes/fdf.h"
 
 t_fdf	*init_fdf(t_map *map)
 {
@@ -56,7 +56,7 @@ int	main(int argc, char **argv)
 	fdf = init_fdf(map);
 	if (!fdf)
 		return (handle_error("FDF başlatılamadı\n", map));
-	get_next_line(-1);  // Clean up GNL static buffer
+	get_next_line(-1);
 	setup_window(fdf);
 	return (0);
 }

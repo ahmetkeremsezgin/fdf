@@ -89,16 +89,6 @@ char	*get_next_line(int fd)
 	static char	*buff;
 	char		*src;
 
-	if (fd == -1)
-	{
-		if (buff)
-		{
-			free(buff);
-			buff = NULL;
-		}
-		return (NULL);
-	}
-
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
 		if (buff)
