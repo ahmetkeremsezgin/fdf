@@ -64,6 +64,12 @@ static void	process_line(t_map *map, char **split, int i)
 		map->points[i][j].x = j;
 		map->points[i][j].y = i;
 		set_point_values(&map->points[i][j], split[j]);
+		j++;
+	}
+	
+	j = 0;
+	while (split[j])
+	{
 		free(split[j]);
 		j++;
 	}
@@ -80,8 +86,12 @@ static void	fill_map_points(t_map *map, int fd)
 	while (i < map->height)
 	{
 		line = get_next_line(fd);
+		if (!line)
+			break;
 		split = ft_split(line, ' ');
 		free(line);
+		if (!split)
+			break;
 		process_line(map, split, i);
 		i++;
 	}

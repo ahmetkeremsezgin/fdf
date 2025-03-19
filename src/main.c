@@ -56,6 +56,7 @@ int	main(int argc, char **argv)
 	fdf = init_fdf(map);
 	if (!fdf)
 		return (handle_error("FDF başlatılamadı\n", map));
+	get_next_line(-1);  // Clean up GNL static buffer
 	setup_window(fdf);
 	return (0);
 }

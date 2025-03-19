@@ -89,11 +89,28 @@ char	*get_next_line(int fd)
 	static char	*buff;
 	char		*src;
 
+	if (fd == -1)
+	{
+		if (buff)
+		{
+			free(buff);
+			buff = NULL;
+		}
+		return (NULL);
+	}
+
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (free(buff), buff = NULL, NULL);
+	{
+		if (buff)
+		{
+			free(buff);
+			buff = NULL;
+		}
+		return (NULL);
+	}
 	buff = ft_alloc(fd, buff);
 	if (!buff)
-		return (free(buff), buff = NULL, NULL);
+		return (NULL);
 	src = ft_first_part(buff);
 	buff = ft_last_part(buff);
 	return (src);

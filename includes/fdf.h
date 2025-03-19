@@ -20,8 +20,8 @@
 # include "../minilibx-linux/mlx.h"
 # include "get_next_line.h"
 
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1440
+# define WIN_HEIGHT 900
 # define KEY_ESC 65307
 
 typedef struct s_point

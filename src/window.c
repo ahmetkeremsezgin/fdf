@@ -14,8 +14,10 @@
 
 int	close_window(t_fdf *fdf)
 {
+	get_next_line(-1);
 	mlx_destroy_window(fdf->mlx_ptr, fdf->win_ptr);
 	mlx_destroy_display(fdf->mlx_ptr);
+	free(fdf->mlx_ptr);
 	free_map(fdf->map);
 	free(fdf);
 	exit(0);
