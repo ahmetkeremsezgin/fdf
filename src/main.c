@@ -47,20 +47,42 @@ static int	handle_error(char *msg, t_map *map)
 	return (1);
 }
 
+void	init_image(t_fdf *fdf)
+{
+	fdf->img.img_ptr = mlx_new_image(fdf->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	fdf->img.addr = mlx_get_data_addr
+		(fdf->img.img_ptr, &fdf->img.bits_per_pixel,
+			&fdf->img.line_length, &fdf->img.endian);
+}
+
+int	key_hook(int keycode, t_fdf *fdf)
+{
+	if (keycode == KEY_ESC)
+	{
+		exit_program(fdf);
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_fdf	*fdf;
 	t_map	*map;
 
 	if (argc != 2)
-		return (handle_error("Kullanım: ./fdf harita_dosyası.fdf\n", NULL));
+		ft_error("Usage: ./fdf <filename.fdf>");
+	if (!check_file_extension(argv[1]))
+		ft_error("Error: File must have .fdf extension");
 	map = read_map(argv[1]);
 	if (!map)
-		return (handle_error("Harita okunamadı\n", NULL));
+		return (handle_error("Error: Map not found\n", NULL));
 	fdf = init_fdf(map);
 	if (!fdf)
-		return (handle_error("FDF başlatılamadı\n", map));
+		return (handle_error("Error: Failed to initialize FDF\n", map));
 	get_next_line(-1);
+	init_image(fdf);
 	setup_window(fdf);
+	mlx_key_hook(fdf->win_ptr, key_hook, fdf);
+	mlx_hook(fdf->win_ptr, 17, 0, exit_program, fdf);
 	return (0);
 }

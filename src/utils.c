@@ -16,12 +16,6 @@
 #include <stdlib.h>
 #include "../minilibx-linux/mlx.h"
 
-void	put_pixel(t_fdf *fdf, int x, int y, int color)
-{
-	if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
-		mlx_pixel_put(fdf->mlx_ptr, fdf->win_ptr, x, y, color);
-}
-
 int	ft_atoi(const char *str)
 {
 	int	i;
@@ -97,4 +91,33 @@ double	get_min_height(t_map *map)
 		y++;
 	}
 	return (min_height);
+}
+
+void	exit_program(t_fdf *fdf)
+{
+	if (!fdf)
+		exit(0);
+	if (fdf->img.img_ptr)
+	{
+		mlx_destroy_image(fdf->mlx_ptr, fdf->img.img_ptr);
+		fdf->img.img_ptr = NULL;
+	}
+	if (fdf->win_ptr)
+	{
+		mlx_destroy_window(fdf->mlx_ptr, fdf->win_ptr);
+		fdf->win_ptr = NULL;
+	}
+	if (fdf->map)
+	{
+		free_map(fdf->map);
+		fdf->map = NULL;
+	}
+	if (fdf->mlx_ptr)
+	{
+		mlx_destroy_display(fdf->mlx_ptr);
+		free(fdf->mlx_ptr);
+		fdf->mlx_ptr = NULL;
+	}
+	free(fdf);
+	exit(0);
 }

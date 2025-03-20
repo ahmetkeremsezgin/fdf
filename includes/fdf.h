@@ -17,6 +17,17 @@
 # define WIN_HEIGHT 900
 # define KEY_ESC 65307
 
+typedef struct s_data
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	void	*mlx;
+	void	*win;
+}	t_data;
+
 typedef struct s_point
 {
 	int	x;
@@ -32,10 +43,20 @@ typedef struct s_map
 	t_point	**points;
 }	t_map;
 
+typedef struct s_img
+{
+	void	*img_ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
+
 typedef struct s_fdf
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	t_img	img;
 	t_map	*map;
 }	t_fdf;
 
@@ -64,6 +85,8 @@ void	draw_map(t_fdf *fdf);
 void	draw_line(t_point p1, t_point p2, t_fdf *fdf);
 
 int		ft_atoi(const char *str);
+int		exit_program(t_fdf *fdf);
+int		check_file_extension(char *filename);
 int		ft_atoi_base(const char *str, int base);
 char	**ft_split(char const *s, char c);
 void	ft_error(char *msg);

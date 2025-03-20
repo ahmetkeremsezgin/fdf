@@ -38,18 +38,6 @@ static float	get_scale_factor(t_map *map)
 	return (scale);
 }
 
-static void	calculate_iso(t_point_iso *p, t_point p1, t_point p2, float scale)
-{
-	p->iso_x1 = (p1.x - p1.y) * scale;
-	p->iso_y1 = (p1.x + p1.y - p1.z) * (scale / 2);
-	p->iso_x2 = (p2.x - p2.y) * scale;
-	p->iso_y2 = (p2.x + p2.y - p2.z) * (scale / 2);
-	p->iso_x1 += WIN_WIDTH / 2;
-	p->iso_y1 += WIN_HEIGHT / 2;
-	p->iso_x2 += WIN_WIDTH / 2;
-	p->iso_y2 += WIN_HEIGHT / 2;
-}
-
 static void	calculate_delta(t_delta *d, t_point_iso *p)
 {
 	d->dx = p->iso_x2 - p->iso_x1;
@@ -83,12 +71,30 @@ void	draw_line(t_point p1, t_point p2, t_fdf *fdf)
 	}
 }
 
+void	clear_image(t_fdf *fdf)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < WIN_HEIGHT)
+	{
+		j = 0;
+		while (j < WIN_WIDTH)
+		{
+			put_pixel(fdf, j, i, 0x000000);
+			j++;
+		}
+		i++;
+	}
+}
+
 void	draw_map(t_fdf *fdf)
 {
 	int	x;
 	int	y;
 
-	mlx_clear_window(fdf->mlx_ptr, fdf->win_ptr);
+	clear_image(fdf);
 	y = 0;
 	while (y < fdf->map->height)
 	{
@@ -105,4 +111,5 @@ void	draw_map(t_fdf *fdf)
 		}
 		y++;
 	}
+	mlx_put_image_to_window(fdf->mlx_ptr, fdf->win_ptr, fdf->img.img_ptr, 0, 0);
 }

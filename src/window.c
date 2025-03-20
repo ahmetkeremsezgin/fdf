@@ -27,13 +27,6 @@ int	close_window(t_fdf *fdf)
 	return (0);
 }
 
-int	key_hook(int keycode, t_fdf *fdf)
-{
-	if (keycode == KEY_ESC)
-		close_window(fdf);
-	return (0);
-}
-
 void	setup_window(t_fdf *fdf)
 {
 	draw_map(fdf);
