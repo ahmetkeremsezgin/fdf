@@ -6,11 +6,15 @@
 /*   By: asezgin <asezgin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 11:44:07 by asezgin           #+#    #+#             */
-/*   Updated: 2025/03/19 08:38:27 by asezgin          ###   ########.fr       */
+/*   Updated: 2025/03/20 15:09:27 by asezgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include "../includes/get_next_line.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include "../minilibx-linux/mlx.h"
 
 t_fdf	*init_fdf(t_map *map)
 {

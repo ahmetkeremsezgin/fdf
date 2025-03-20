@@ -11,7 +11,10 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include "stdio.h"
+#include "../includes/get_next_line.h"
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdlib.h>
 
 static int	get_height(char *filename)
 {

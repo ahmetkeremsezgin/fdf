@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include <stdlib.h>
 
 int	count_words(char *line)
 {

@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include <math.h>
+#include "../minilibx-linux/mlx.h"
 
 static float	get_scale_factor(t_map *map)
 {

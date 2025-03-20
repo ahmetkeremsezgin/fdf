@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include "../includes/get_next_line.h"
+#include <stdlib.h>
+#include "../minilibx-linux/mlx.h"
 
 int	close_window(t_fdf *fdf)
 {

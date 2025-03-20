@@ -6,11 +6,15 @@
 /*   By: asezgin <asezgin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 11:43:35 by asezgin           #+#    #+#             */
-/*   Updated: 2025/03/19 08:25:37 by asezgin          ###   ########.fr       */
+/*   Updated: 2025/03/20 15:09:52 by asezgin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include "../includes/get_next_line.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include "../minilibx-linux/mlx.h"
 
 void	put_pixel(t_fdf *fdf, int x, int y, int color)
 {

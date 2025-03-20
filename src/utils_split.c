@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include <stdlib.h>
 
 static int	word_count(char const *s, char c)
 {
