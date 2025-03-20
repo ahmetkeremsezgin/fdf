@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include "stdio.h"
 
 static int	get_height(char *filename)
 {
