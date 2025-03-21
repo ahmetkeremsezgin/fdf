@@ -82,7 +82,5 @@ int	main(int argc, char **argv)
 	get_next_line(-1);
 	init_image(fdf);
 	setup_window(fdf);
-	mlx_key_hook(fdf->win_ptr, key_hook, fdf);
-	mlx_hook(fdf->win_ptr, 17, 0, exit_program, fdf);
 	return (0);
 }

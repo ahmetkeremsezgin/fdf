@@ -17,17 +17,6 @@
 # define WIN_HEIGHT 900
 # define KEY_ESC 65307
 
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	void	*mlx;
-	void	*win;
-}	t_data;
-
 typedef struct s_point
 {
 	int	x;
@@ -96,6 +85,7 @@ char	*ft_strchr(const char *s, int c);
 void	put_pixel(t_fdf *fdf, int x, int y, int color);
 double	get_min_height(t_map *map);
 double	get_max_height(t_map *map);
+void	calculate_iso(t_point_iso *p, t_point p1, t_point p2, float scale);
 
 void	setup_window(t_fdf *fdf);
 

@@ -93,31 +93,26 @@ double	get_min_height(t_map *map)
 	return (min_height);
 }
 
-void	exit_program(t_fdf *fdf)
+int	exit_program(t_fdf *fdf)
 {
 	if (!fdf)
 		exit(0);
 	if (fdf->img.img_ptr)
-	{
 		mlx_destroy_image(fdf->mlx_ptr, fdf->img.img_ptr);
-		fdf->img.img_ptr = NULL;
-	}
 	if (fdf->win_ptr)
-	{
 		mlx_destroy_window(fdf->mlx_ptr, fdf->win_ptr);
-		fdf->win_ptr = NULL;
-	}
 	if (fdf->map)
-	{
 		free_map(fdf->map);
-		fdf->map = NULL;
-	}
 	if (fdf->mlx_ptr)
 	{
 		mlx_destroy_display(fdf->mlx_ptr);
 		free(fdf->mlx_ptr);
-		fdf->mlx_ptr = NULL;
 	}
+	fdf->mlx_ptr = NULL;
+	fdf->img.img_ptr = NULL;
+	fdf->map = NULL;
+	fdf->win_ptr = NULL;
 	free(fdf);
-	exit(0);
+	exit (0);
+	return (0);
 }

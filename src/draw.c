@@ -31,8 +31,6 @@ static float	get_scale_factor(t_map *map)
 		scale = scale_x;
 	else
 		scale = scale_y;
-	if (scale < 1)
-		return (scale);
 	if (scale > 30)
 		return (30);
 	return (scale);

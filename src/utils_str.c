@@ -12,6 +12,7 @@
 
 #include "../includes/fdf.h"
 #include <stdlib.h>
+#include "../includes/get_next_line.h"
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -54,12 +55,12 @@ int	ft_atoi_base(const char *str, int base)
 	return (result * sign);
 }
 
-static void	calculate_iso(t_point_iso *p, t_point p1, t_point p2, float scale)
+void	calculate_iso(t_point_iso *p, t_point p1, t_point p2, float scale)
 {
 	p->iso_x1 = (p1.x - p1.y) * scale;
-	p->iso_y1 = (p1.x + p1.y - p1.z) * (scale / 2);
+	p->iso_y1 = (p1.x + p1.y - p1.z) * (scale * 0.2);
 	p->iso_x2 = (p2.x - p2.y) * scale;
-	p->iso_y2 = (p2.x + p2.y - p2.z) * (scale / 2);
+	p->iso_y2 = (p2.x + p2.y - p2.z) * (scale * 0.2);
 	p->iso_x1 += WIN_WIDTH / 2;
 	p->iso_y1 += WIN_HEIGHT / 2;
 	p->iso_x2 += WIN_WIDTH / 2;
